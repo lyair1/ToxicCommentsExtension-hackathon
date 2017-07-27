@@ -9,9 +9,7 @@ _gaq.push(['_trackPageview']);
 })();
 
 const youtubeCommentFilter = function(node) {
-    $("div.comment-renderer-text-content").each(function(i, ele){
-        hideToxicComments($(this));
-    });
+    hideToxicComments("div.comment-renderer-text-content");
 };
 
 const observer = new MutationObserver(function(mutations) {

@@ -9,10 +9,7 @@ _gaq.push(['_trackPageview']);
 })();
 
 const facebookCommentFilter = function(node) {
-    $("span.UFICommentBody").each(function(i, ele){
-        hideToxicComments($(this).children("span"));
-    });
-
+    hideToxicComments($("span.UFICommentBody").children("span"));
 };
 
 const observer = new MutationObserver(function(mutations) {

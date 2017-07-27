@@ -9,9 +9,7 @@ _gaq.push(['_trackPageview']);
 })();
 
 const redditCommentFilter = function(node) {
-    $("div.md").each(function(i, ele){
-        hideToxicComments($(this));
-    });
+    hideToxicComments("div.md");
 };
 
 const observer = new MutationObserver(function(mutations) {

@@ -10,37 +10,53 @@ function cssShowText(ele){
     ele.css("background-image", "none");
 }
 
-function hideToxicComments(commentSpan){
-    if(commentSpan.attr('id') != "1"){
-            commentSpan.attr("id","1");
-            console.log("sending request to 'comments' server");
-            $.ajax({
-                method: 'POST',
-                url:"https://hateblockapi.azurewebsites.net/api/Toxicity?code=1Rfug4qf3Ra8Uos7F7kZR2NMpYNNGS4B5hiJPp/5HutMsMGHD9893g==",
-                dataType: 'json',
-                crossDomain : true,
-                data: commentSpan.text(),
-                success:function(str){
-                    var score = parseFloat(str);
-                    var isToxic = score < 2; 
-                    if (isToxic){
-                        var toxicImageUrl = chrome.extension.getURL("images/toxic-comment.png");
-                        console.log("Comment is toxic");
-                        cssHideText(commentSpan, toxicImageUrl);
-                        commentSpan.hover(function(){
-                            cssShowText(commentSpan, toxicImageUrl);                  
-                        }, function(){
-                            cssHideText(commentSpan);
-                        });
-                    }else{
-                        // This is a non toxic comment, don't change it
-                        console.log("Comment is non toxic");
-                    }
-                },
-                error:function(XMLHttpRequest, textStatus, errorThrown){
-                    console.log("we got an error back from the server." + JSON.stringify(errorThrown));
-                }      
-            });
+function hideToxicComments(divName){
+    var comments = [];
+    var commentSpanArr = [];
+    $(divName).each(function(){
+        if($(this).attr('id') != "1"){
+            comments.push($(this).text());
+            commentSpanArr.push($(this));
+            $(this).attr("id","1");
         }
-    });
+    })
+
+    if (comments.length > 0) {
+        console.log("sending request to 'comments' server");
+        console.log(JSON.stringify(comments));
+        $.ajax({
+            method: 'POST',
+            url:"https://hateblockapi.azurewebsites.net/api/ToxicityBeta?code=17UGko7oJ96sBZGTsfUCFaxN3II24AEoNTPb6tdXkPUZOQtPRzTEmA==",
+            dataType: 'json',
+            crossDomain : true,
+            data: JSON.stringify(comments),
+            success:function(str){
+                updateComments(str, commentSpanArr);
+            },
+            error:function(XMLHttpRequest, textStatus, errorThrown){
+                console.log("we got an error back from the server." + JSON.stringify(errorThrown));
+            }      
+        });
+    }
+}
+
+function updateComments(results, commentSpanArr) {
+    for (var i = 0; i < results.length; i++) {
+        var score = parseFloat(results[i]);
+        var isToxic = score < 1.9; 
+        var commentSpan = commentSpanArr[i];
+        if (isToxic){
+            var toxicImageUrl = chrome.extension.getURL("images/toxic-comment.png");
+            console.log("Comment is toxic");
+            cssHideText(commentSpan, toxicImageUrl);
+            commentSpan.hover(function(){
+                cssShowText(commentSpan, toxicImageUrl);                  
+            }, function(){
+                cssHideText(commentSpan);
+            });
+        }else{
+            // This is a non toxic comment, don't change it
+            console.log("Comment is non toxic");
+        }
+    }
 }
