@@ -8,31 +8,17 @@ _gaq.push(['_trackPageview']);
   var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 })();
 
-const youtube_clickbait = function(node) {
-    // $("div.md").each(function(i, ele){
-    //     $(this).html("I love everyone on this world! they are so nice and wonderfull!!! :))))))))");
-    // });
-
+const redditCommentFilter = function(node) {
     $("div.md").each(function(i, ele){
-        var txt = $(this).text;
-         $(this).hover(
-            function () {
-                $(this).text("I love everyone on this world! they are so nice and wonderfull!!! :))))))))")
-            }, 
-            function () {
-                $(this).text("txt")
-            }
-        );
+        hideToxicComments($(this));
     });
-
-    console.log($("div.md").length);
 };
 
 const observer = new MutationObserver(function(mutations) {
     mutations.forEach(function(mutation) {
         mutation.addedNodes.forEach(function(node) {
             if (node.nodeType === 1) { // ELEMENT_NODE
-                youtube_clickbait(node);
+                redditCommentFilter(node);
             }
         });
     });
@@ -42,4 +28,4 @@ const config = { attributes: false, childList: true, characterData: false, subtr
 
 observer.observe(document.body, config);
 
-youtube_clickbait(document.body);
+redditCommentFilter(document.body);

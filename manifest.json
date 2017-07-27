@@ -7,7 +7,7 @@
   "permissions": [
     "http://www.facebook.com/*", "https://www.facebook.com/*", "https://hateblockapi.azurewebsites.net/api/*"
   ],
-  "web_accessible_resources": [ "locales/*"],
+  "web_accessible_resources": [ "locales/*", "images/*.png"],
   "browser_action": {
     "default_icon": "/icons/HateBlock19.png"
   },
@@ -21,24 +21,21 @@
   "content_scripts": [
     {
         "matches": ["http://www.facebook.com/*", "https://www.facebook.com/*"],
-        "js": ["jquery-3.2.1.min.js","facebook.js"],
+        "js": ["jquery-3.2.1.min.js",  "logic.js", "facebook.js"],
         "run_at" : "document_idle",
         "all_frames" : false
     },
     {
         "matches": ["http://www.youtube.com/*", "https://www.youtube.com/*"],
-        "js" : [ "jquery-3.2.1.min.js","youtube.js"],
+        "js" : [ "jquery-3.2.1.min.js", "logic.js", "youtube.js"],
         "run_at" : "document_idle",
         "all_frames" : false
     },
     {
         "matches": ["http://www.reddit.com/*", "https://www.reddit.com/*"],
-        "js" : [ "jquery-3.2.1.min.js","reddit.js"],
+        "js" : [ "jquery-3.2.1.min.js",  "logic.js", "reddit.js"],
         "run_at" : "document_idle",
         "all_frames" : false
     }
-  ],
-  "web_accessible_resources": [
-    "images/*.png"
   ]
 }

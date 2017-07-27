@@ -8,35 +8,9 @@ _gaq.push(['_trackPageview']);
   var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 })();
 
-const facebook_clickbait = function(node) {
+const facebookCommentFilter = function(node) {
     $("span.UFICommentBody").each(function(i, ele){
-        var commentSpan = $(this).children("span");
-        if(commentSpan.attr('id') != "1"){
-            commentSpan.attr("id","1");
-
-            $.ajax({
-                method: 'POST',
-                url:"https://hateblockapi.azurewebsites.net/api/Toxicity?code=1Rfug4qf3Ra8Uos7F7kZR2NMpYNNGS4B5hiJPp/5HutMsMGHD9893g==",
-                dataType: 'json', // Notice! JSONP <-- P (lowercase)
-                crossDomain : true,
-                data: commentSpan.text(),
-                success:function(str){
-                    // do stuff with json (in this case an array)
-                    //alert(json);
-                    var score = parseFloat(str);
-                    var isToxic = score < 2; 
-                    if (isToxic){
-                        commentSpan.text("**HATE**:" + commentSpan.text());
-                    }else{
-                        commentSpan.text("**NICE**:" + commentSpan.text());
-                    }
-
-                },
-                error:function(){
-                    commentSpan.text("**ERROR**:" + commentSpan.text());
-                }      
-            });
-        }
+        hideToxicComments($(this).children("span"));
     });
 
 };
@@ -45,7 +19,7 @@ const observer = new MutationObserver(function(mutations) {
     mutations.forEach(function(mutation) {
         mutation.addedNodes.forEach(function(node) {
             if (node.nodeType === 1) { // ELEMENT_NODE
-                facebook_clickbait(node);
+                facebookCommentFilter(node);
             }
         });
     });
@@ -58,4 +32,4 @@ const config = { attributes: false, childList: true, characterData: false, subtr
 
 observer.observe(document.body, config);
 
-facebook_clickbait(document.body);
+facebookCommentFilter(document.body);
