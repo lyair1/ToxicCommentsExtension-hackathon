@@ -28,14 +28,20 @@
         "all_frames" : false
     },
     {
-        "matches": ["http://www.youtube.com/*", "https://www.youtube.com/*"],
+        "matches": ["http://www.youtube.com/*", "https://www.youtube.com/*", "http://youtube.com/*", "https://youtube.com/*"],
         "js" : [ "jquery-3.2.1.min.js", "logic.js", "youtube.js"],
         "run_at" : "document_idle",
         "all_frames" : false
     },
     {
-        "matches": ["http://www.reddit.com/*", "https://www.reddit.com/*"],
+        "matches": ["http://www.reddit.com/*", "https://www.reddit.com/*","http://reddit.com/*", "https://reddit.com/*"],
         "js" : [ "jquery-3.2.1.min.js",  "logic.js", "reddit.js"],
+        "run_at" : "document_idle",
+        "all_frames" : false
+    },
+    {
+        "matches": ["http://www.twitter.com/*", "https://www.twitter.com/*", "http://twitter.com/*", "https://twitter.com/*"],
+        "js" : [ "jquery-3.2.1.min.js",  "logic.js", "twitter.js"],
         "run_at" : "document_idle",
         "all_frames" : false
     }
