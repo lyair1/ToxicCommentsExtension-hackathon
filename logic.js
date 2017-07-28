@@ -22,7 +22,7 @@ function hasSomeParentTheClass(element, classname) {
     return found;
 }
 
-function hideToxicComments(divName, filter){
+function hideToxicComments(divName){
     chrome.storage.local.get("sensitivity", function(items){
         if (items["sensitivity"] != undefined){
             sensitivity = parseFloat(items["sensitivity"]);
