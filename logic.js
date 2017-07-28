@@ -35,7 +35,6 @@ function hideToxicComments(divName){
             $.ajax({
                 method: 'POST',
                 url:"https://hateblockapi.azurewebsites.net/api/Toxicity?code=1Rfug4qf3Ra8Uos7F7kZR2NMpYNNGS4B5hiJPp/5HutMsMGHD9893g==",
-                dataType: 'json',
                 crossDomain : true,
                 data: JSON.stringify(comments),
                 success:function(str){
