@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "author": "Zach Dylag, Yair Levi, Vickie Cheng",
   "manifest_version": 2,
-  "description": "Hides toxic comments on Facebook, YouTube, and Reddit",
+  "description": "Hides toxic comments on Facebook, YouTube, Reddit, and Twitter",
   "permissions": [
     "http://www.facebook.com/*", "https://www.facebook.com/*", "https://hateblockapi.azurewebsites.net/api/*","activeTab","storage"
   ],
