@@ -1,4 +1,5 @@
 var sensitivity = 1.5;
+var count = 0;
 
 function cssHideText(ele, imageUrl){
     ele.css("text-indent","-9999px");
@@ -54,6 +55,8 @@ function updateComments(results, commentSpanArr) {
         var isToxic = score < sensitivity; 
         var commentSpan = commentSpanArr[i];
         if (isToxic){
+            count++;
+            chrome.runtime.sendMessage(count); 
             var toxicImageUrl = chrome.extension.getURL("images/toxic-comment.png");
             console.log("Comment is toxic");
             cssHideText(commentSpan, toxicImageUrl);

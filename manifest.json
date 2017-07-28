@@ -7,7 +7,7 @@
   "permissions": [
     "http://www.facebook.com/*", "https://www.facebook.com/*", "https://hateblockapi.azurewebsites.net/api/*","activeTab","storage"
   ],
-  "web_accessible_resources": [ "locales/*", "images/*.png"],
+  "web_accessible_resources": [ "locales/*", "images/*"],
   "browser_action": {
     "default_icon": "/icons/HateBlock19.png",
     "default_popup": "popup.html",
@@ -45,5 +45,8 @@
         "run_at" : "document_idle",
         "all_frames" : false
     }
-  ]
+  ],
+  "background": {
+    "scripts": ["badge.js"]
+  }
 }
