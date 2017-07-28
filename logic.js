@@ -14,7 +14,7 @@ function cssShowText(ele){
 }
 
 function hideToxicComments(divName){
-    chrome.storage.local.get(["sensitivity"], function(items){
+    chrome.storage.local.get("sensitivity", function(items){
         if (items["sensitivity"] != undefined){
             sensitivity = parseFloat(items["sensitivity"]);
         }

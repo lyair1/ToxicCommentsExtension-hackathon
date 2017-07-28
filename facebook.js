@@ -14,11 +14,13 @@ const facebookCommentFilter = function(node) {
 
 const observer = new MutationObserver(function(mutations) {
     mutations.forEach(function(mutation) {
-        mutation.addedNodes.forEach(function(node) {
-            if (node.nodeType === 1) { // ELEMENT_NODE
-                facebookCommentFilter(node);
-            }
-        });
+        if (mutation.addedNodes) {
+            mutation.addedNodes.forEach(function(node) {
+                if (node.nodeType === 1) { // ELEMENT_NODE
+                    facebookCommentFilter(node);
+                }
+            });
+        }
     });
 });
 
