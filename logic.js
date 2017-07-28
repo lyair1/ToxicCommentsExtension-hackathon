@@ -2,12 +2,14 @@ var sensitivity = 1.5;
 
 function cssHideText(ele, imageUrl){
     ele.css("text-indent","-9999px");
+    ele.css("color","transparent");
     ele.css("background-image", "url(" + imageUrl + ")");
     ele.css("background-size", "contain");
 }
 
 function cssShowText(ele){
     ele.css("text-indent","0px");
+    ele.css("color","black");
     ele.css("background-image", "none");
 }
 
@@ -32,7 +34,7 @@ function hideToxicComments(divName){
             // console.log(JSON.stringify(comments));
             $.ajax({
                 method: 'POST',
-                url:"https://hateblockapi.azurewebsites.net/api/ToxicityBeta?code=17UGko7oJ96sBZGTsfUCFaxN3II24AEoNTPb6tdXkPUZOQtPRzTEmA==",
+                url:"https://hateblockapi.azurewebsites.net/api/Toxicity?code=1Rfug4qf3Ra8Uos7F7kZR2NMpYNNGS4B5hiJPp/5HutMsMGHD9893g==",
                 dataType: 'json',
                 crossDomain : true,
                 data: JSON.stringify(comments),
