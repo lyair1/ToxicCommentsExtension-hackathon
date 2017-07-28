@@ -14,15 +14,24 @@ function cssShowText(ele){
     ele.css("background-image", "none");
 }
 
-function hideToxicComments(divName){
+function hasSomeParentTheClass(element, classname) {
+    var found = false;
+    element.parents().each(function(){
+        if ($(this).hasClass(classname)) {found = true;}
+    });
+    return found;
+}
+
+function hideToxicComments(divName, filter){
     chrome.storage.local.get("sensitivity", function(items){
         if (items["sensitivity"] != undefined){
             sensitivity = parseFloat(items["sensitivity"]);
         }
         var comments = [];
         var commentSpanArr = [];
+
         $(divName).each(function(){
-            if($(this).attr('id') != "1"){
+            if($(this).attr('id') != "1" && !hasSomeParentTheClass($(this), "side")){
                 comments.push($(this).text());
                 commentSpanArr.push($(this));
                 $(this).attr("id","1");
